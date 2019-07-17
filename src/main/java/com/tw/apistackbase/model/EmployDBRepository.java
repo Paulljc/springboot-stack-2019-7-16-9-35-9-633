@@ -5,7 +5,7 @@ import com.tw.apistackbase.entity.Employee;
 import java.util.List;
 
 public interface EmployDBRepository {
-    List<Employee> fetchAllEmployees();
+    List<Employee> fetchAllEmployees(Integer page, Integer pageSize);
 
     Employee fetchEmployeeById(int id);
 
@@ -16,6 +16,4 @@ public interface EmployDBRepository {
     Employee updateEmployee(int id, Employee employee);
 
     Employee deleteEmployee(int id);
-
-    List<Employee> getCompanyByPagination(Integer page, Integer pageSize);
 }

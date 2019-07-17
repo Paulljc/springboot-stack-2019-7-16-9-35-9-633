@@ -15,8 +15,8 @@ public class CompanyService {
     @Autowired
     CompanyDBRepository companyDBRepository;
 
-    public List<Company> fetchAllCompany() {
-        return companyDBRepository.fetchAllCompany();
+    public List<Company> fetchAllCompany(Integer page, Integer pageSize) {
+        return companyDBRepository.fetchAllCompany(page, pageSize);
     }
 
     public Company fetchCompanyByCompanyName(String companyName){
@@ -39,7 +39,4 @@ public class CompanyService {
         return companyDBRepository.deleteCompany(companyName);
     }
 
-    public List<Company> getCompanyByPagination(Integer page, Integer pageSize) {
-        return companyDBRepository.getCompanyByPagination(page, pageSize);
-    }
 }

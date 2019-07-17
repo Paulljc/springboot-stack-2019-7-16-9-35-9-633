@@ -39,8 +39,12 @@ public class CompanyRepository implements CompanyDBRepository {
     }
 
     @Override
-    public List<Company> fetchAllCompany() {
-        return new ArrayList<>(companies.values());
+    public List<Company> fetchAllCompany(Integer page, Integer pageSize) {
+        if (page == null){
+            return new ArrayList<>(companies.values());
+        }else {
+            return companies.values().stream().skip((Math.max(0, page - 1) * pageSize)).limit(pageSize).collect(Collectors.toList());
+        }
     }
 
     @Override
@@ -73,9 +77,4 @@ public class CompanyRepository implements CompanyDBRepository {
         return companies.remove(companyName);
     }
 
-
-    @Override
-    public List<Company> getCompanyByPagination(Integer page, Integer pageSize) {
-        return companies.values().stream().skip((Math.max(0, page - 1) * pageSize)).limit(pageSize).collect(Collectors.toList());
-    }
 }

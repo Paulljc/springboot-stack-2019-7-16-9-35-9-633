@@ -6,7 +6,7 @@ import com.tw.apistackbase.entity.Employee;
 import java.util.List;
 
 public interface CompanyDBRepository {
-    List<Company> fetchAllCompany();
+    List<Company> fetchAllCompany(Integer page, Integer pageSize);
 
     Company fetchCompanyByCompanyName(String companyName);
 
@@ -18,5 +18,4 @@ public interface CompanyDBRepository {
 
     Company deleteCompany(String companyName);
 
-    List<Company> getCompanyByPagination(Integer page, Integer pageSize);
 }

@@ -13,8 +13,8 @@ public class EmployeeService {
     @Autowired
     private EmployDBRepository employDBRepository;
 
-    public List<Employee> fetchAllEmployees() {
-        return employDBRepository.fetchAllEmployees();
+    public List<Employee> fetchAllEmployees(Integer page, Integer pageSize) {
+        return employDBRepository.fetchAllEmployees(page, pageSize);
     }
 
     public Employee fetchEmployeeById(int id){

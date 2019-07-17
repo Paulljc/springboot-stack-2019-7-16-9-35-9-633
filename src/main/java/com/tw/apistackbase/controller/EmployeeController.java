@@ -15,8 +15,8 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @GetMapping()
-    public List<Employee> fetchAllEmployees(){
-        return employeeService.fetchAllEmployees();
+    public List<Employee> fetchAllEmployees(Integer page, Integer pageSize){
+        return employeeService.fetchAllEmployees(page, pageSize);
     }
 
     @GetMapping("/{id}")

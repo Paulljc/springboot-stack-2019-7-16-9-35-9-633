@@ -16,8 +16,8 @@ public class CompanyController {
     CompanyService companyService;
 
     @GetMapping()
-    public List<Company> fetchAllCompany(){
-        return companyService.fetchAllCompany();
+    public List<Company> fetchAllCompany(Integer page, Integer pageSize){
+        return companyService.fetchAllCompany(page, pageSize);
     }
 
     @GetMapping("/{companyName}")
@@ -45,8 +45,4 @@ public class CompanyController {
         return companyService.deleteCompany(companyName);
     }
 
-    @GetMapping()
-    public List<Company> getCompanyByPagination(Integer page, Integer pageSize) {
-        return companyService.getCompanyByPagination(page, pageSize);
-    }
 }

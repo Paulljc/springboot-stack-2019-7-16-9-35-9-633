@@ -29,8 +29,12 @@ public class EmployRepository implements EmployDBRepository {
     }
 
     @Override
-    public List<Employee> fetchAllEmployees() {
-        return new ArrayList<>(employees.values());
+    public List<Employee> fetchAllEmployees(Integer page, Integer pageSize) {
+        if (page == null){
+            return new ArrayList<>(employees.values());
+        }else {
+            return employees.values().stream().skip((Math.max(0, page - 1) * pageSize)).limit(pageSize).collect(Collectors.toList());
+        }
     }
 
     @Override
@@ -61,11 +65,6 @@ public class EmployRepository implements EmployDBRepository {
     @Override
     public Employee deleteEmployee(int id) {
         return employees.remove(id);
-    }
-
-    @Override
-    public List<Employee> getCompanyByPagination(Integer page, Integer pageSize) {
-        return employees.values().stream().skip((Math.max(0, page - 1) * pageSize)).limit(pageSize).collect(Collectors.toList());
     }
 
 }
