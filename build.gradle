@@ -30,10 +30,12 @@ repositories {
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-stater-jpa'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.0.0')
     testCompile('org.junit.jupiter:junit-jupiter-params:5.0.0')
     testRuntime('org.junit.jupiter:junit-jupiter-engine:5.0.0')
+    runtime('com.h2database:h2')
 }

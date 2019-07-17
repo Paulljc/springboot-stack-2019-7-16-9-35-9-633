@@ -19,6 +19,7 @@ public class EmployeeController {
         return employeeService.fetchAllEmployees(page, pageSize);
     }
 
+
     @GetMapping("/{id}")
     public Employee fetchEmployeeById(@PathVariable("id")int id){
         return employeeService.fetchEmployeeById(id);

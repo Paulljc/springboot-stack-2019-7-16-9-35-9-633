@@ -54,9 +54,9 @@ public class CompanyControllerTest {
         ResultActions result = mvc.perform(get("/companies"));
 
         result.andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].companyName", Matchers.is("T1")))
-                .andExpect(jsonPath("$[0].employeesNumber", Matchers.is(12)))
-                .andExpect(jsonPath("$[0].employees[0].id", Matchers.is(11)));
+                .andExpect(jsonPath("$[0].companyName", is("T1")))
+                .andExpect(jsonPath("$[0].employeesNumber", is(12)))
+                .andExpect(jsonPath("$[0].employees[0].id", is(11)));
     }
 
     @Test
@@ -68,9 +68,9 @@ public class CompanyControllerTest {
         ResultActions result = mvc.perform(get("/companies/{companyName}", conpany.getCompanyName()));
 
         result.andExpect(status().isOk())
-                .andExpect(jsonPath("$.companyName", Matchers.is("T1")))
-                .andExpect(jsonPath("$.employeesNumber", Matchers.is(12)))
-                .andExpect(jsonPath("$.employees[0].id", Matchers.is(11)));
+                .andExpect(jsonPath("$.companyName", is("T1")))
+                .andExpect(jsonPath("$.employeesNumber", is(12)))
+                .andExpect(jsonPath("$.employees[0].id", is(11)));
     }
 
     @Test
@@ -82,9 +82,9 @@ public class CompanyControllerTest {
         ResultActions result = mvc.perform(post("/companies").contentType(MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(conpany)));
 
         result.andExpect(status().isOk())
-                .andExpect(jsonPath("$.companyName", Matchers.is("T1")))
-                .andExpect(jsonPath("$.employeesNumber", Matchers.is(12)))
-                .andExpect(jsonPath("$.employees[0].id", Matchers.is(11)));
+                .andExpect(jsonPath("$.companyName", is("T1")))
+                .andExpect(jsonPath("$.employeesNumber", is(12)))
+                .andExpect(jsonPath("$.employees[0].id", is(11)));
     }
 
     @Test
@@ -96,9 +96,9 @@ public class CompanyControllerTest {
         ResultActions result = mvc.perform(delete("/companies/{companyName}", "T1"));
 
         result.andExpect(status().isOk())
-                .andExpect(jsonPath("$.companyName", Matchers.is("T1")))
-                .andExpect(jsonPath("$.employeesNumber", Matchers.is(12)))
-                .andExpect(jsonPath("$.employees[0].id", Matchers.is(11)));
+                .andExpect(jsonPath("$.companyName", is("T1")))
+                .andExpect(jsonPath("$.employeesNumber", is(12)))
+                .andExpect(jsonPath("$.employees[0].id", is(11)));
     }
 
     @Test
@@ -109,8 +109,8 @@ public class CompanyControllerTest {
 
         ResultActions result = mvc.perform(MockMvcRequestBuilders.put("/companies/{companyName}", "T1", conpany).contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(conpany)))
-                .andExpect(jsonPath("$.companyName", Matchers.is("T1")))
-                .andExpect(jsonPath("$.employeesNumber", Matchers.is(12)))
-                .andExpect(jsonPath("$.employees[0].id", Matchers.is(11)));
+                .andExpect(jsonPath("$.companyName", is("T1")))
+                .andExpect(jsonPath("$.employeesNumber", is(12)))
+                .andExpect(jsonPath("$.employees[0].id", is(11)));
     }
 }
