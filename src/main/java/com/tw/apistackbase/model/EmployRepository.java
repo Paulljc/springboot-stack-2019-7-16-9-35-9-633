@@ -44,7 +44,7 @@ public class EmployRepository implements EmployDBRepository {
 
     @Override
     public List<Employee> fetchEmployeeByGender(String gender) {
-        return employees.values().stream().filter(employee -> employee.getGender() != "Male").collect(Collectors.toList());
+        return employees.values().stream().filter(employee -> employee.getGender().equals(gender)).collect(Collectors.toList());
     }
 
     @Override

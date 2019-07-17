@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    @Autowired
+    @Autowired(required = true)
     EmployeeService employeeService;
 
     @GetMapping()

@@ -4,10 +4,7 @@ import com.tw.apistackbase.entity.Company;
 import com.tw.apistackbase.entity.Employee;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -16,8 +13,8 @@ public class CompanyRepository implements CompanyDBRepository {
     private static final Map<String, Company> companies = new HashMap<>();
 
     static {
-        companies.put("T1", createCompany("T1", 2, (List<Employee>) createEmployee(111, "hehe", 11, "male", 4000)));
-        companies.put("T2", createCompany("T2", 2, (List<Employee>) createEmployee(114, "heh", 11, "male", 7000)));
+        companies.put("T1", createCompany("T1", 2, Arrays.asList(createEmployee(111, "hehe", 11, "male", 4000))));
+        companies.put("T2", createCompany("T2", 2, Arrays.asList(createEmployee(114, "heh", 11, "male", 7000))));
     }
 
     private static Employee createEmployee(int id, String name, int age, String gender, int salary) {
