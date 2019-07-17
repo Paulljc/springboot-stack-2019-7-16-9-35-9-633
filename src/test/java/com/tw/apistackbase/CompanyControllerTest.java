@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
 
@@ -95,6 +96,19 @@ public class CompanyControllerTest {
         ResultActions result = mvc.perform(delete("/companies/{companyName}", "T1"));
 
         result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.companyName", Matchers.is("T1")))
+                .andExpect(jsonPath("$.employeesNumber", Matchers.is(12)))
+                .andExpect(jsonPath("$.employees[0].id", Matchers.is(11)));
+    }
+
+    @Test
+    public void should_return_spectify_company_when_update_company() throws Exception {
+        Company conpany = new Company("T1", 12, Arrays.asList(new Employee(11, "we", 12, "male", 400)));
+
+        when(companyService.updateCompany(anyString(), ArgumentMatchers.any())).thenReturn(conpany);
+
+        ResultActions result = mvc.perform(MockMvcRequestBuilders.put("/companies/{companyName}", "T1", conpany).contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(conpany)))
                 .andExpect(jsonPath("$.companyName", Matchers.is("T1")))
                 .andExpect(jsonPath("$.employeesNumber", Matchers.is(12)))
                 .andExpect(jsonPath("$.employees[0].id", Matchers.is(11)));

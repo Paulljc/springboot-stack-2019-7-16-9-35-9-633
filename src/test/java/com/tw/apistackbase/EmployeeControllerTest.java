@@ -1,6 +1,7 @@
 package com.tw.apistackbase;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tw.apistackbase.controller.EmployeeController;
 import com.tw.apistackbase.entity.Employee;
 import com.tw.apistackbase.model.EmployDBRepository;
@@ -96,18 +97,10 @@ public class EmployeeControllerTest {
     public void should_return_employee_when_create_a_new_employee() throws Exception {
         Employee employee = new Employee(1111, "we", 18, "male", 2000);
 
-        String requestBody = "{\n" +
-                "        \"id\": 1111,\n" +
-                "        \"name\": \"we\",\n" +
-                "        \"age\": 18,\n" +
-                "        \"gender\": \"male\",\n" +
-                "        \"salary\": 2000\n" +
-                "    }";
-
         when(employeeService.addEmployee(ArgumentMatchers.any())).thenReturn(employee);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/employees").contentType(MediaType.APPLICATION_JSON)
-                .content(requestBody))
+                .content(new ObjectMapper().writeValueAsString(employee)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("we")))
                 .andExpect(jsonPath("$.age", is(18)))
@@ -120,18 +113,10 @@ public class EmployeeControllerTest {
     public void should_return_employee_when_update_an_employee_infomation() throws Exception{
         Employee employee = new Employee(1111, "we", 18, "male", 2000);
 
-        String requestBody = "{\n" +
-                "        \"id\": 1112,\n" +
-                "        \"name\": \"we\",\n" +
-                "        \"age\": 18,\n" +
-                "        \"gender\": \"male\",\n" +
-                "        \"salary\": 2000\n" +
-                "    }";
-
         when(employeeService.updateEmployee(anyInt(), ArgumentMatchers.any())).thenReturn(employee);
 
             mockMvc.perform(MockMvcRequestBuilders.put("/employees/{id}", 1111).contentType(MediaType.APPLICATION_JSON)
-                    .content(requestBody))
+                    .content(new ObjectMapper().writeValueAsString(employee)))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.name", is("we")))
                     .andExpect(jsonPath("$.age", is(18)))
